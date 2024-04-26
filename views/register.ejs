@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    
+    <form action="/register" method="POST">
+        <h2>Registro</h2>
+
+        <%# if (locals.errors){ %>
+            <%# for(let error in errors) { %>
+                <!-- <p><%#= errors[error].msg %></p> -->
+            <%# } %>
+        <%# } %>
+
+        <label for="">Nombre de Usuario</label>
+        <input type="text" name="username" placeholder="Introduzca su Nombre de Usuario" value="<%= locals.oldData ? oldData.username : null %>"><br>
+        <% if (locals.errors && errors.username) { %>
+            <div class="feedback"><%= errors.username.msg %></div>
+        <% } %>
+
+        <label for="">E-Mail</label>
+        <input type="email" name="email" placeholder="Introduzca su E-Mail" value="<%= locals.oldData ? oldData.email : null %>"><br>
+        <% if (locals.errors && errors.email) { %>
+            <div class="feedback"><%= errors.email.msg %></div>
+        <% } %>
+
+        <label for="">Contraseña</label>
+        <input type="password" name="password" placeholder="Introduzca su Contraseña"><br>
+        <% if (locals.errors && errors.password) { %>
+            <div class="feedback"><%= errors.password.msg %></div>
+        <% } %>
+
+        <button type="submit">Registrarse</button>
+        <!-- <input type="submit" name="register" value="Registrarse"> -->
+
+    </form>
+
+</body>
+</html>

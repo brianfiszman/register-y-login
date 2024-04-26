@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    
+    <form action="/login" method="POST">
+        <h2>Login</h2>
+
+        <label for="">E-Mail</label>
+        <input type="email" name="email" placeholder="Introduzca su E-Mail"><br>
+        <% if (locals.errors && errors.email) { %>
+            <div class="feedback"><%= errors.email.msg %></div>
+        <% } %>
+
+        <label for="">Contraseña</label>
+        <input type="password" name="password" placeholder="Introduzca su Contraseña"><br>
+        <% if (locals.errors && errors.password) { %>
+            <div class="feedback"><%= errors.password.msg %></div>
+        <% } %>
+
+        <button type="submit" name="login">Login</button>
+        <!-- <input type="submit" name="login" value="Login"> -->
+
+    </form>
+
+</body>
+</html>
