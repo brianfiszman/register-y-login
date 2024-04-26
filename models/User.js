@@ -46,8 +46,8 @@ const User = {
         fs.writeFileSync(jsonUsersFile, JSON.stringify(allUsers, null, ' '));
         res.send(newUser);
 
-        let hashedPass = bcryptjs.hashSync(req.body.password, 10);
-        let equalPass = bcryptjs.compareSync(req.body.repPassword, hashedPass);
+        let hashedPass = bcrypt.hashSync(req.body.password, 10);
+        let equalPass = bcrypt.compareSync(req.body.password, hashedPass);
         if (equalPass) {
             
         }
@@ -66,10 +66,14 @@ const User = {
 
     },
 
-    delete: function(){
-
-    },
+    delete: function(id){
+        let finalUsers = users.filter(function(user){
+            user.id !== id;
+        });
+        fs.writeFileSync(jsonUsersFile, JSON.stringify(finalUsers, null, ' '));
+        return true;
+    }
 }
 
-// User.create({username: "Damucho", email: "damucho@damucho.com"});
+// console.log(User.delete(2));
 module.exports = User;

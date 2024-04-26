@@ -4,5 +4,11 @@
   "username": "Insite",
   "email": "insite@insite.com",
   "password": "$2a$10$OVjRJ5ZdbbIR/25ZJkQHU.wwxyxb3.BM0VCVyF7l8YVaS8v8fSYEy"
+ },
+ {
+  "id": 2,
+  "username": "Damucho",
+  "email": "damucho@damucho.com",
+  "password": "$2a$10$fE5xreY8Z6Ajv1lLfUYopeP2yvJKgCZWT8eBaGoTxRGmsbSkaMLI."
  }
 ]

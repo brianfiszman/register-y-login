@@ -91,8 +91,17 @@ const controller = {
     },
 
     delete: function(req, res){
-
+        // let userIndex = users.findIndex(function(user){
+        //     user.id == parseInt(req.params.id);
+        // })
+        // if (userIndex !== -1){
+        //     users.splice(userIndex, 1);
+        //     let usersJSON = JSON.stringify(users);
+        //     fs.writeFileSync(jsonUsersFile, usersJSON);
+        //     res.redirect('/');
+        // }
     }
+
 }
 
 module.exports = controller;
