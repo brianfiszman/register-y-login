@@ -19,27 +19,51 @@ const controller = {
 
     loginProcess: function(req, res){
         // VALIDACIÓN
-        const validation = validationResult(req);
-        if (validation.errors.length > 0){
-            return res.render("login", {
-                errors: validation.mapped(),
-                oldData: req.body
-            });
+        const validation = validationResult(req);    
+
+        let userToLogin = users.find(user => user.email == req.body.email.toLowerCase().trim());
+        if (userToLogin){
+            let equalPass = bcrypt.compareSync(req.body.password, userToLogin.password);
+            if (equalPass){
+                res.redirect("/");
+            } else {
+                res.render("login", {
+                    errors: {
+                        password: {
+                            msg: "La contraseña ingresada es incorrecta"
+                        },
+                        oldData: req.body
+                    }
+                })
+            }
         } else {
-            res.redirect("/");
+            res.render("login", {
+                errors: {
+                    email: {
+                        msg: "Usuario no encontrado"
+                    },
+                    oldData: req.body
+                }
+            })
         }
 
-        // let userToLogin = users.find(function(user){
-        //     user.email === req.body.email.toLowerCase();
-        // })
+        return res.render("login", {
+            errors: validation.mapped(),
+            oldData: req.body
+        })
 
-        // if (userToLogin){
-        //     if (bcrypt.compareSync(req.body.password, hashedPass)){
-        //         res.redirect("/");
-        //     } else {
-        //         res.send("Contraseña incorrecta");
+        // return res.render("login", {
+        //     errors: {
+        //         email: {
+        //             msg: "El e-mail ingresado es incorrecto",
+        //             oldData: req.body
+        //         },
+
+        //         password: {
+        //             msg: "La contraseña ingresada es incorrecta"
+        //         }
         //     }
-        // }
+        // })
     },
 
     register: function(req, res){
@@ -83,6 +107,11 @@ const controller = {
             users.push(newUser);
             fs.writeFileSync(jsonUsersFile, JSON.stringify(users, null, ' '));
         }
+
+        /* 
+            A FUTURO SE PUEDE AGREGAR FUNCIÓN QUE NO PERMITA REPETIRSE EL MAIL DE REGISTRO.
+            VER PROCESO DE LOGIN COMPLETO (EXPRESS CLASE 32).
+        */
         
     },
 
@@ -91,15 +120,7 @@ const controller = {
     },
 
     delete: function(req, res){
-        // let userIndex = users.findIndex(function(user){
-        //     user.id == parseInt(req.params.id);
-        // })
-        // if (userIndex !== -1){
-        //     users.splice(userIndex, 1);
-        //     let usersJSON = JSON.stringify(users);
-        //     fs.writeFileSync(jsonUsersFile, usersJSON);
-        //     res.redirect('/');
-        // }
+        
     }
 
 }

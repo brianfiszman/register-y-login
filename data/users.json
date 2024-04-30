@@ -10,5 +10,11 @@
   "username": "Damucho",
   "email": "damucho@damucho.com",
   "password": "$2a$10$fE5xreY8Z6Ajv1lLfUYopeP2yvJKgCZWT8eBaGoTxRGmsbSkaMLI."
+ },
+ {
+  "id": 3,
+  "username": "prueba",
+  "email": "prueba@prueba.com",
+  "password": "$2a$10$lf2NvgeArAfNywbruo0hM.RHsqCjmPfVaAediHyRph7uJn5Y9MioS"
  }
 ]

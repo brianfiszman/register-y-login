@@ -10,6 +10,7 @@ const path = require("path");
 const usersDatabase = require("../data/users.json")
 const jsonUsersFile = path.join(__dirname, '../data/users.json');
 const users = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));
+const { validationResult } = require('express-validator');
 
 const User = {
     // jsonUsersFile: './data/users.json',
@@ -24,26 +25,21 @@ const User = {
     },
 
     findByPk: function(id){
-        let allUsers = this.findAll();
-        let userFound = allUsers.find(function(user){
+        let userFound = users.find(function(user){
             user.id === id;
         })
         return userFound;
     },
 
     findByField: function(field, text){
-        let allUsers = this.findAll();
-        let userFound = allUsers.find(function(user){
+        let userFound = users.find(function(user){
             user[field] === text;
         })
         return userFound;
     },
 
     create: function(req, res){
-        // let allUsers = this.findAll();
-        let allUsers = users;
-        // let newUser = req.body;
-        fs.writeFileSync(jsonUsersFile, JSON.stringify(allUsers, null, ' '));
+        fs.writeFileSync(jsonUsersFile, JSON.stringify(users, null, ' '));
         res.send(newUser);
 
         let hashedPass = bcrypt.hashSync(req.body.password, 10);
@@ -75,5 +71,4 @@ const User = {
     }
 }
 
-// console.log(User.delete(2));
 module.exports = User;

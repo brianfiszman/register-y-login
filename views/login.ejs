@@ -11,7 +11,7 @@
         <h2>Login</h2>
 
         <label for="">E-Mail</label>
-        <input type="email" name="email" placeholder="Introduzca su E-Mail"><br>
+        <input type="email" name="email" placeholder="Introduzca su E-Mail" value="<%= locals.oldData ? oldData.email : null %>"><br>
         <% if (locals.errors && errors.email) { %>
             <div class="feedback"><%= errors.email.msg %></div>
         <% } %>
@@ -22,7 +22,7 @@
             <div class="feedback"><%= errors.password.msg %></div>
         <% } %>
 
-        <button type="submit" name="login">Login</button>
+        <button type="submit">Login</button>
         <!-- <input type="submit" name="login" value="Login"> -->
 
     </form>
