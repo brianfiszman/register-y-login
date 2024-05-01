@@ -10,7 +10,9 @@ const users = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));
 
 const controller = {
     index: function(req, res){
-        res.render("index");
+        res.render("index", {
+            user: req.session.userLogged
+        })
     },
 
     login: function(req, res){
@@ -25,8 +27,9 @@ const controller = {
         if (userToLogin){
             let equalPass = bcrypt.compareSync(req.body.password, userToLogin.password);
             if (equalPass){
+                // delete userToLogin.password;
                 req.session.userLogged = userToLogin;
-                res.redirect("/");
+                res.redirect("/profile");
             } else {
                 res.render("login", {
                     errors: {
@@ -37,7 +40,8 @@ const controller = {
                     }
                 })
             }
-        } else {
+        } 
+        else {
             res.render("login", {
                 errors: {
                     email: {
@@ -81,7 +85,7 @@ const controller = {
                 oldData: req.body
             });
         } else {
-            res.redirect("/");
+            res.redirect("/profile");
         }
 
         // HASHEO DE CONTRASEÑA Y VERIFICACIÓN SI SON IGUALES
@@ -125,7 +129,9 @@ const controller = {
     },
 
     profile: function(req, res){
-        
+        res.render("profile", {
+            user: req.session.userLogged
+        })
     }
 }
 
