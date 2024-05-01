@@ -132,6 +132,11 @@ const controller = {
         res.render("profile", {
             user: req.session.userLogged
         })
+    },
+
+    logout: function(req, res){
+        req.session.destroy();
+        return res.redirect("/");
     }
 }
 

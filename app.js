@@ -20,6 +20,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+// const userLoggedMiddleware = require("./middlewares/userLoggedMW");
+// app.use(userLoggedMiddleware);
 
 
 // ************ Template Engine ************

@@ -26,8 +26,12 @@ router.get("/register", guestMiddleware, mainController.register);
 /* PROCESO DE REGISTRO */
 router.post("/register", validationRegister, mainController.registerProcess);
 
+
 /* PERFIL DE USUARIO LOGUEADO */
 router.get("/profile", authMiddleware, mainController.profile);
 
+
+/* LOGOUT */
+router.get("/logout", mainController.logout);
 
 module.exports = router;
