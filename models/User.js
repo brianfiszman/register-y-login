@@ -67,7 +67,6 @@ const User = {
             user.id !== id;
         });
         fs.writeFileSync(jsonUsersFile, JSON.stringify(finalUsers, null, ' '));
-        return true;
     }
 }
 

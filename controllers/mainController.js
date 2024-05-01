@@ -25,6 +25,7 @@ const controller = {
         if (userToLogin){
             let equalPass = bcrypt.compareSync(req.body.password, userToLogin.password);
             if (equalPass){
+                req.session.userLogged = userToLogin;
                 res.redirect("/");
             } else {
                 res.render("login", {
@@ -121,8 +122,11 @@ const controller = {
 
     delete: function(req, res){
         
-    }
+    },
 
+    profile: function(req, res){
+        
+    }
 }
 
 module.exports = controller;
