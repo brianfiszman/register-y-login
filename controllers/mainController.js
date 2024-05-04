@@ -52,10 +52,10 @@ const controller = {
             })
         }
 
-        return res.render("login", {
-            errors: validation.mapped(),
-            oldData: req.body
-        })
+        // return res.render("login", {
+        //     errors: validation.mapped(),
+        //     oldData: req.body
+        // })
 
         // return res.render("login", {
         //     errors: {
