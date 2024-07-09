@@ -4,6 +4,7 @@ const path = require("path");
 const session = require("express-session");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const db = require('../models');
 
 const jsonUsersFile = path.join(__dirname, '../data/users.json');
 const users = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));

@@ -4,70 +4,45 @@
 // 4. Editar la información de un usuario
 // 5. Eliminar a un usuario de la BD
 
-const fs = require("fs");
-const bcrypt = require("bcryptjs");
-const path = require("path");
-const usersDatabase = require("../data/users.json")
-const jsonUsersFile = path.join(__dirname, '../data/users.json');
-const users = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));
-const { validationResult } = require('express-validator');
+// const fs = require("fs");
+// const bcrypt = require("bcryptjs");
+// const path = require("path");
+// const usersDatabase = require("../data/users.json")
+// const jsonUsersFile = path.join(__dirname, '../data/users.json');
+// const users = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));
+// const { validationResult } = require('express-validator');
 
-const User = {
-    // jsonUsersFile: './data/users.json',
-    // getData: function(){
-    //     return JSON.parse(fs.readFileSync(this.jsonUsersFile, 'utf-8'));
-    // },
+module.exports = function(sequelize, dataTypes){
+    let alias = "Users";
+    let cols = {
+        id: {
+            type: dataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
 
-    findAll: function(){
-        // return this.getData();
-        // let data = JSON.parse(fs.readFileSync(jsonUsersFile, 'utf-8'));
-        return users;
-    },
+        username: {
+            type: dataTypes.STRING(45),
+            allowNull: false
+        },
 
-    findByPk: function(id){
-        let userFound = users.find(function(user){
-            user.id === id;
-        })
-        return userFound;
-    },
+        email: {
+            type: dataTypes.STRING(45),
+            allowNull: false
+        },
 
-    findByField: function(field, text){
-        let userFound = users.find(function(user){
-            user[field] === text;
-        })
-        return userFound;
-    },
-
-    create: function(req, res){
-        fs.writeFileSync(jsonUsersFile, JSON.stringify(users, null, ' '));
-        res.send(newUser);
-
-        let hashedPass = bcrypt.hashSync(req.body.password, 10);
-        let equalPass = bcrypt.compareSync(req.body.password, hashedPass);
-        if (equalPass) {
-            
+        password: {
+            type: dataTypes.STRING(45),
+            allowNull: false
         }
-    },
-
-    generateId: function(){
-        let lastUser = users.pop();
-        if (lastUser){
-            return lastUser.id + 1;
-        } else {
-            return 1;
-        }
-    },
-
-    update: function(){
-
-    },
-
-    delete: function(id){
-        let finalUsers = users.filter(function(user){
-            user.id !== id;
-        });
-        fs.writeFileSync(jsonUsersFile, JSON.stringify(finalUsers, null, ' '));
     }
-}
 
-module.exports = User;
+    let config = {
+        tableName: 'users',
+        timestamps: false
+    }
+
+    let User = sequelize.define(alias, cols, config);
+    return User;
+}
